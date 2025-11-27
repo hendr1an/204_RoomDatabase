@@ -1,8 +1,13 @@
 package com.example.myroomsatu.view.route
 
-import com.example.myroomsatu.R
+interface DestinasiNavigasi {
+    /**
+     * Nama unik untuk menentukan jalur untuk composable
+     */
+    val route: String
 
-object DestinasiHome : DestinasiNavigasi {
-    override val route = "home"
-    override val titleRes = "Data Siswa"
+    /**
+     * String resource id yang berisi judul yang akan ditampilkan di layar halaman.
+     */
+    val titleRes: Int
 }
