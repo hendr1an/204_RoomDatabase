@@ -1,5 +1,6 @@
-package com.example.myroomsatu.view
+package com.example.myroomsatu.view.halaman
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,7 +15,6 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -22,30 +22,29 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myroomsatu.R
 import com.example.myroomsatu.room.Siswa
+import com.example.myroomsatu.view.SiswaTopAppBar
 import com.example.myroomsatu.view.route.DestinasiHome
 import com.example.myroomsatu.viewmodel.HomeViewModel
-
-
+import com.example.myroomsatu.viewmodel.provider.PenyediaViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navigateToItemEntry: () -> Unit,
     modifier: Modifier = Modifier,
-    // Pastikan HomeViewModel dan PenyediaViewModel sudah dibuat di file lain
     viewModel: HomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -54,7 +53,7 @@ fun HomeScreen(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             SiswaTopAppBar(
-                title = stringResource(id = DestinasiHome.titleRes),
+                title = stringResource(DestinasiHome.titleRes),
                 canNavigateBack = false,
                 scrollBehavior = scrollBehavior
             )
@@ -63,17 +62,15 @@ fun HomeScreen(
             FloatingActionButton(
                 onClick = navigateToItemEntry,
                 shape = MaterialTheme.shapes.medium,
-                modifier = Modifier.padding(16.dp) // Saya ganti dimensionResource agar aman
+                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = stringResource(id = R.string.tambah_siswa) // Pastikan string ini ada
+                    contentDescription = stringResource(R.string.tambah_siswa)
                 )
             }
         },
     ) { innerPadding ->
-
-        // Mengambil state dari ViewModel
         val uiStateSiswa by viewModel.homeUiState.collectAsState()
 
         BodyHome(
@@ -85,7 +82,6 @@ fun HomeScreen(
     }
 }
 
-// --- 3. BODY HALAMAN (LOGIKA LIST KOSONG VS ISI) ---
 @Composable
 fun BodyHome(
     itemSiswa: List<Siswa>,
@@ -97,20 +93,19 @@ fun BodyHome(
     ) {
         if (itemSiswa.isEmpty()) {
             Text(
-                text = stringResource(R.string.deskripsi_no_item), // Pastikan string "Tidak ada data..." ada di xml
+                text = stringResource(R.string.deskripsi_no_item),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleLarge
             )
         } else {
             ListSiswa(
                 itemSiswa = itemSiswa,
-                modifier = Modifier.padding(horizontal = 8.dp)
+                modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
             )
         }
     }
 }
 
-// --- 4. LIST (LAZY COLUMN) ---
 @Composable
 fun ListSiswa(
     itemSiswa: List<Siswa>,
@@ -120,13 +115,13 @@ fun ListSiswa(
         items(items = itemSiswa, key = { it.id }) { person ->
             DataSiswa(
                 siswa = person,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier
+                    .padding(dimensionResource(id = R.dimen.padding_small))
             )
         }
     }
 }
 
-// --- 5. ITEM KARTU SISWA (DATASISWA) ---
 @Composable
 fun DataSiswa(
     siswa: Siswa,
@@ -137,7 +132,7 @@ fun DataSiswa(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
-            modifier = Modifier.padding(12.dp), // Saya sederhanakan paddingnya
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large)),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Row(
@@ -163,26 +158,4 @@ fun DataSiswa(
             )
         }
     }
-}
-
-// --- 6. KOMPONEN TAMBAHAN (SiswaTopAppBar) ---
-// Saya buatkan ini karena dipanggil di HomeScreen tapi tidak ada di gambar
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SiswaTopAppBar(
-    title: String,
-    canNavigateBack: Boolean,
-    modifier: Modifier = Modifier,
-    scrollBehavior: TopAppBarScrollBehavior? = null,
-    navigateUp: () -> Unit = {}
-) {
-    CenterAlignedTopAppBar(
-        title = { Text(title) },
-        modifier = modifier,
-        scrollBehavior = scrollBehavior,
-        navigationIcon = {
-            if (canNavigateBack) {
-            }
-        }
-    )
 }

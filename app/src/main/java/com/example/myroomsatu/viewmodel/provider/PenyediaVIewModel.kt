@@ -4,10 +4,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.myroomsatu.AplikasiSiswa
-// Pastikan import ini sesuai dengan lokasi file ViewModel Anda nantinya
-// import com.example.myroomsatu.viewmodel.HomeViewModel
-// import com.example.myroomsatu.viewmodel.EntryViewModel
+import com.example.myroomsatu.repositori.AplikasiSiswa
+import com.example.myroomsatu.viewmodel.EntryViewModel
+import com.example.myroomsatu.viewmodel.HomeViewModel
 
 object PenyediaViewModel {
     val Factory = viewModelFactory {

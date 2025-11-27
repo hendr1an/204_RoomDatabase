@@ -146,7 +146,7 @@ fun FormInputSiswa(
         }
         HorizontalDivider(
             modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_medium)),
-            thickness = dimensionResource(id = R.dimen.thickness_divider),
+            thickness = dimensionResource(id = R.dimen.padding_medium),
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f) // Atau Color.Blue sesuai gambar
         )
     }

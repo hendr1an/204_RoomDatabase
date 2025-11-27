@@ -1,6 +1,8 @@
-package com.example.myroomsatu.view.route
+    package com.example.myroomsatu.view.route
 
-object DestinasiEntry : DestinasiNavigasi {
-    override val route = "item_entry"
-    override val titleRes = "Tambah Siswa"
-}
+    import com.example.myroomsatu.R
+
+    object DestinasiEntry : DestinasiNavigasi {
+        override val route = "item_entry"
+        override val titleRes = R.string.judul_entry
+    }
