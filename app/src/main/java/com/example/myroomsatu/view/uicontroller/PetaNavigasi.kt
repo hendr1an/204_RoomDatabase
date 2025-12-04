@@ -1,5 +1,6 @@
 package com.example.myroomsatu.view.uicontroller
 
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -8,16 +9,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.myroomsatu.view.DetailSiswaScreen
 import com.example.myroomsatu.view.EntrySiswaScreen
 import com.example.myroomsatu.view.halaman.HomeScreen
 import com.example.myroomsatu.view.route.DestinasiDetailSiswa
 import com.example.myroomsatu.view.route.DestinasiEditSiswa
-// Pastikan import destinasi dan screen Anda sesuai package-nya
-import com.example.myroomsatu.view.route.DestinasiHome
 import com.example.myroomsatu.view.route.DestinasiEntry
-// import com.example.myroomsatu.view.halaman.HomeScreen (Sesuaikan package)
-// import com.example.myroomsatu.view.halaman.EntrySiswaScreen (Sesuaikan package)
+import com.example.myroomsatu.view.route.DestinasiHome
 
 @Composable
 fun SiswaApp(navController: NavHostController = rememberNavController(), modifier: Modifier = Modifier) {
@@ -80,9 +77,4 @@ fun HostNavigasi(
             )
         }
     }
-}
-
-@Composable
-fun EditSiswaScreen(navigateBack: () -> Boolean, onNavigateUp: () -> Boolean) {
-    TODO("Not yet implemented")
 }
