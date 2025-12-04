@@ -8,6 +8,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.savedstate.savedState
 import com.example.myroomsatu.repositori.AplikasiSiswa
 import com.example.myroomsatu.viewmodel.DetailViewModel
+import com.example.myroomsatu.viewmodel.EditViewModel
 import com.example.myroomsatu.viewmodel.EntryViewModel
 import com.example.myroomsatu.viewmodel.HomeViewModel
 
